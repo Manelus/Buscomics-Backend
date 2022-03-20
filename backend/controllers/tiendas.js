@@ -61,13 +61,18 @@ tiendaController.logout = async (req, res) => {
 
 tiendaController.delete = async (req, res, next) => {
   try {
-    const { id } = req.body;
     const deleteTienda = await tiendas.destroy({
       where: {
-        id: id
+        id: req.tienda.id
       }
     });
-    deleteTienda === 1 ? res.status(200).json('Tienda eliminada.') : res.status(200).json({});
+    const token = await tokens.destroy({
+      where: {
+        token: req.token
+    }
+    })
+    
+    deleteTienda === 1 || token === 1 ? res.status(200).json('Tienda eliminada.') : res.status(200).json({});
   } catch (e) {
     console.log(e)
     res.status(500).json({});
