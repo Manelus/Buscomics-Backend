@@ -14,9 +14,21 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tiendas.init({
-    nombre: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    nombre: {
+      type: DataTypes.STRING
+    },
+    email: {
+      type: DataTypes.STRING
+    },
+    password: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'tiendas',

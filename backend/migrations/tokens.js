@@ -1,30 +1,24 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('comics', {
-      nombre: {
+    await queryInterface.createTable('tokens', {
+      id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER
+      },
+      token: {
+        type: Sequelize.STRING
+      },
+      idTienda: {
         type: Sequelize.INTEGER,
-        
-      },
-      autor: {
-        type: Sequelize.STRING
-      },
-      imagen: {
-        type: Sequelize.STRING
-      },
-      nombre_tienda: {
-        type: Sequelize.STRING,
         onDelete: "cascade",
         reference:{
           model:"tiendas",
-          key:"nombre",
-          as: "nombreTienda"
+          key:"id",
+          as: "idTienda"
         }
-      },
-      enlace: {
-        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('comics');
+    await queryInterface.dropTable('tokens');
   }
 };

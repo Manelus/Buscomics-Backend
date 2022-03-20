@@ -1,34 +1,23 @@
-const jwt = require('jsonwebtoken');
-const authConfig = require('../config/auth');
-const { user } = require('../models/index'); //incluyo user model
+const jwt = require("jsonwebtoken");
+const {tiendas} = require('../models');
 
-module.exports = (req, res, next) => {
-
-    //console.log(req.headers);
-
-    // Comprobar que existe el token
-    if(!req.headers.authorization) {
-        res.status(401).json({ msg: "Acceso no autorizado" });
-    } else {
-
-        // Comrpobar la validez de este token
-        let token = req.headers.authorization.split(" ")[1];
-
-        // Comprobar la validez de este token
-        jwt.verify(token, authConfig.secret, (err, decoded) => {
-
-            if(err) {
-                res.status(500).json({ msg: "Ha ocurrido un problema al decodificar el token", err });
-            } else {
-                
-                user.findByPk(decoded.user.id, { include: "roles" }).then(user => {
-                    //console.log(user.roles);
-                    req.user = user;
-                    next();
-                });
-            }
-
-        })
-    }
-
+const auth = async (req, res, next) => {
+  try {
+    const token = req.header("Authorization").replace("Bearer ", "");
+    const data = jwt.verify(token, process.env.JWT_SECRET);
+    const tienda = await tiendas.findOne({
+        where: {
+          id: data.id
+        }
+    });
+    if (!tienda) return res.status(401).json('Introduce un token válido')
+    req.tienda = tienda;
+    req.token = token;
+    
+    next();
+  } catch (error) {
+    console.log(error)
+    res.status(500).send({ error: "Not authorized to access this resource" });
+  }
 };
+module.exports = auth;
