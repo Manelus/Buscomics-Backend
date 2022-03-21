@@ -2,13 +2,22 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('comics', {
-      nombre: {
+      id: {
         allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
-        
+        type: Sequelize.INTEGER
+      },
+      nombre: {
+        type: Sequelize.STRING
+      },
+      precio: {
+        type: Sequelize.STRING
       },
       autor: {
+        type: Sequelize.STRING
+      },
+      personaje: {
         type: Sequelize.STRING
       },
       imagen: {

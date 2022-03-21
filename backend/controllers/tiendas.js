@@ -69,7 +69,7 @@ tiendaController.delete = async (req, res, next) => {
     const token = await tokens.destroy({
       where: {
         token: req.token
-    }
+      }
     })
     
     deleteTienda === 1 || token === 1 ? res.status(200).json('Tienda eliminada.') : res.status(200).json({});

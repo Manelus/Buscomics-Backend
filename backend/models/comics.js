@@ -18,11 +18,33 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   comics.init({
-    nombre: DataTypes.STRING,
-    autor: DataTypes.STRING,
-    imagen: DataTypes.STRING,
-    nombre_tienda: DataTypes.STRING,
-    enlace: DataTypes.STRING
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    nombre: {
+      type: DataTypes.STRING
+    },
+    precio: {
+      type: DataTypes.STRING
+    },
+    autor: {
+      type: DataTypes.STRING
+    },
+    personaje: {
+      type: DataTypes.STRING
+    },
+    imagen: {
+      type: DataTypes.STRING
+    },
+    nombre_tienda: {
+      type: DataTypes.STRING
+    },
+    enlace: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'comics',

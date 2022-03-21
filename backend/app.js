@@ -7,7 +7,7 @@ require("dotenv").config();
 
 
 var tiendaRouter = require("./routes/tiendas");
-// var comicRouter = require("./routes/comics");
+var comicRouter = require("./routes/comics");
 
 var app = express();
 const PORT = process.env.PORT || 4000;
@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors({origin: '*'}));
 
 app.use("/tienda", tiendaRouter);
-// app.use("/comics", usersRouter);
+app.use("/comics", comicRouter);
 
 app.use(function (req, res, next) {
     next(createError(404));
