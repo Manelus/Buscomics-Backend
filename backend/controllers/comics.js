@@ -9,9 +9,15 @@ comicController.getAll = async function (req, res){
 
 comicController.getByName = async function (req, res){
     comics.findAll({ where: { nombre: req.params.nombre } })
-      .then(data => {
-        res.send(data);//valida que array es diferente
-      })
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `No se en cuentra el comic =${nombre}.`
+        });
+      }
+    })
       .catch(err => {
         res.status(500).send({
           message:
@@ -22,9 +28,15 @@ comicController.getByName = async function (req, res){
 
 comicController.getByAutor = async function (req, res){
     comics.findAll({ where: { autor: req.params.autor } })
-      .then(data => {
+    .then(data => {
+      if (data) {
         res.send(data);
-      })
+      } else {
+        res.status(404).send({
+          message: `No se en cuentra al autor =${autor}.`
+        });
+      }
+    })
       .catch(err => {
         res.status(500).send({
           message:
@@ -35,9 +47,15 @@ comicController.getByAutor = async function (req, res){
 
 comicController.getByPersonaje = async function (req, res){
     comics.findAll({ where: { personaje: req.params.personaje } })
-      .then(data => {
+    .then(data => {
+      if (data) {
         res.send(data);
-      })
+      } else {
+        res.status(404).send({
+          message: `No se en cuentra el personaje =${personaje}.`
+        });
+      }
+    })
       .catch(err => {
         res.status(500).send({
           message:
