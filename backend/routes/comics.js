@@ -16,8 +16,6 @@ router.post('/register', auth, comicController.create);
 
 router.put('/', auth, comicController.update);
 
-router.delete('/all', auth, comicController.deleteAll);
-
 router.delete('/:id', auth, comicController.delete);
 
 module.exports = router;

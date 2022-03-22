@@ -10,7 +10,7 @@ comicController.getAll = async function (req, res){
 comicController.getByName = async function (req, res){
     comics.findAll({ where: { nombre: req.params.nombre } })
       .then(data => {
-        res.send(data);
+        res.send(data);//valida que array es diferente
       })
       .catch(err => {
         res.status(500).send({
@@ -18,7 +18,7 @@ comicController.getByName = async function (req, res){
             err.message || "A ocurrido un error."
         });
       });
-  };
+};
 
 comicController.getByAutor = async function (req, res){
     comics.findAll({ where: { autor: req.params.autor } })
@@ -31,7 +31,7 @@ comicController.getByAutor = async function (req, res){
             err.message || "A ocurrido un error."
         });
       });
-  };
+};
 
 comicController.getByPersonaje = async function (req, res){
     comics.findAll({ where: { personaje: req.params.personaje } })
@@ -44,7 +44,7 @@ comicController.getByPersonaje = async function (req, res){
             err.message || "A ocurrido un error."
         });
       });
-  };
+};
 
 comicController.create = async (req, res) => {
     try {
@@ -99,23 +99,9 @@ comicController.delete = async (req, res) => {
           message: "No se pudo eliminar el comic " + id
         });
       });
-  };
+};
 
-comicController.deleteAll = (req, res) => {
-    comics.destroy({
-      where: {},
-      truncate: false
-    })
-      .then(nums => {
-        res.send({ message: `${nums} comics se han eliminado!` });
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Ha ocurrido un error en la eliminacion."
-        });
-      });
-  };
+
 
 
 module.exports = comicController;
