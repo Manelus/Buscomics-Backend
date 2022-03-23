@@ -17,7 +17,7 @@ se tendran que registrar/colgar las tiendas y ellas se encargan de subir/modific
 El usuario podra ver los comics por nombre, autores o presonaje o grupo.</br>
 </br>
 
-### Preparacion de la api 🚀</br>
+## Preparacion de la api 🚀</br>
 
 Paso 1</br>
 -Descargamos el repositorio con git clone.</br>
@@ -26,7 +26,7 @@ Paso 2</br>
 Paso 3</br>
 -Hacemos un yarn start/dev para iniciar la app</br>
 
-#### Autor</br>
+## Autor</br>
 Manel J Barreda Albuixech</br>
 Github:https://github.com/Manelus
 
