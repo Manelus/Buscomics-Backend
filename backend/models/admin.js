@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class tiendas extends Model {
+  class admin extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      user.belongsToMany(models.role, { as: "roles", through: "user_role", foreignKey: "tienda_id" });
+      user.belongsTo(models.role, { as: "roles", through: "user_role", foreignKey: "tienda_id" });
     }
   }
-  tiendas.init({
+  admin.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -30,9 +30,12 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       type: DataTypes.STRING
     },
+    role: { 
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
-    modelName: 'tiendas',
+    modelName: 'admin',
   });
-  return tiendas;
+  return admin;
 };

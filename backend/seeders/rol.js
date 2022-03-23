@@ -8,7 +8,7 @@ module.exports = {
         updatedAt: new Date() 
       },
       {
-        role: "user", 
+        role: "tienda", 
         createdAt: new Date(), 
         updatedAt: new Date() 
       }
