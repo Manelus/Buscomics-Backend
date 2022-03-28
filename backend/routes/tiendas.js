@@ -7,6 +7,8 @@ const tiendaController = require('../controllers/tiendas');
 
 // Dos rutas: login y registro
 // /api/singin & /api/singup
+router.get('/id/:id', tiendaController.verTienda);
+
 router.post('/signin', tiendaController.signIn);
 
 router.post('/signup', tiendaController.signUp);

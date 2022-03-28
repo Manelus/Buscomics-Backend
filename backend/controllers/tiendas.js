@@ -4,6 +4,13 @@ const jwt = require("jsonwebtoken");
 
 const tiendaController = {};
 
+tiendaController.verTienda = async (req, res, next) => {
+  console.log(req.params.id)
+  const tienda = await tiendas.findOne({ _id: req.params.id })
+  let result = ( tienda !== null )? user: {};
+  res.json(user.simpleUser());
+};
+
 tiendaController.signUp = async (req, res, next) => {
   
     const {nombre, email, password} = {...req.body};
