@@ -1,4 +1,6 @@
+const Sequelize = require("sequelize");
 const {comics} = require('../models');
+const Op = Sequelize.Op;
 
 const comicController = {};
 
@@ -8,7 +10,11 @@ comicController.getAll = async function (req, res){
 }
 
 comicController.getByName = async function (req, res){
-    comics.findAll({ where: { nombre: req.params.nombre } })
+    comics.findAll({ where:
+        { nombre:{ 
+         [Op.like]: `%${req.params.nombre}%`
+        }}
+    })
     .then(data => {
       if (data) {
         res.send(data);
@@ -27,7 +33,11 @@ comicController.getByName = async function (req, res){
 };
 
 comicController.getByAutor = async function (req, res){
-    comics.findAll({ where: { autor: req.params.autor } })
+    comics.findAll({ where: 
+      { autor:{ 
+        [Op.like]: `%${req.params.autor}%`
+       }}
+    })
     .then(data => {
       if (data) {
         res.send(data);
@@ -46,7 +56,11 @@ comicController.getByAutor = async function (req, res){
 };
 
 comicController.getByPersonaje = async function (req, res){
-    comics.findAll({ where: { personaje: req.params.personaje } })
+    comics.findAll({ where: 
+      { personaje:{ 
+        [Op.like]: `%${req.params.personaje}%`
+       }}
+    })
     .then(data => {
       if (data) {
         res.send(data);
