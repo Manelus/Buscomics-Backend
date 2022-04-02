@@ -6,11 +6,7 @@ const comicController = require('../controllers/comics');
 // End-points CRUD 
 router.get('/', comicController.getAll);
 
-router.get('/nombre/:nombre', comicController.getByName);
-
-router.get('/autor/:autor', comicController.getByAutor);
-
-router.get('/personaje/:personaje', comicController.getByPersonaje);
+router.get('/buscar/:nombre', comicController.getByName);
 
 router.post('/register', auth, comicController.create);
 

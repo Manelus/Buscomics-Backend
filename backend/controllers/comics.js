@@ -10,72 +10,34 @@ comicController.getAll = async function (req, res){
 }
 
 comicController.getByName = async function (req, res){
-    comics.findAll({ where:
-        { nombre:{ 
+  try {
+      const nombre = await comics.findAll({ where:
+          { nombre:{
+           [Op.like]: `%${req.params.nombre}%`
+          }}
+      })
+  
+      const autor = await comics.findAll({ where:
+          { autor:{
+           [Op.like]: `%${req.params.nombre}%`
+          }}
+      })
+
+      const personaje = await comics.findAll({ where:
+        { personaje:{
          [Op.like]: `%${req.params.nombre}%`
         }}
     })
-    .then(data => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `No se en cuentra el comic =${nombre}.`
-        });
-      }
-    })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "A ocurrido un error."
-        });
-      });
-};
 
-comicController.getByAutor = async function (req, res){
-    comics.findAll({ where: 
-      { autor:{ 
-        [Op.like]: `%${req.params.autor}%`
-       }}
-    })
-    .then(data => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `No se en cuentra al autor =${autor}.`
-        });
-      }
-    })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "A ocurrido un error."
-        });
-      });
-};
+      const resultado = nombre.concat(autor, personaje)
 
-comicController.getByPersonaje = async function (req, res){
-    comics.findAll({ where: 
-      { personaje:{ 
-        [Op.like]: `%${req.params.personaje}%`
-       }}
-    })
-    .then(data => {
-      if (data) {
-        res.send(data);
-      } else {
-        res.status(404).send({
-          message: `No se en cuentra el personaje =${personaje}.`
-        });
-      }
-    })
-      .catch(err => {
-        res.status(500).send({
+      return res.status(200).json({resultado: resultado, nombre: nombre, autor: autor, personaje: personaje})
+  } catch (error) {
+      return res.status(500).json({
           message:
-            err.message || "A ocurrido un error."
-        });
-      });
+          error.message || "A ocurrido un error."
+      })
+  }
 };
 
 comicController.create = async (req, res) => {
